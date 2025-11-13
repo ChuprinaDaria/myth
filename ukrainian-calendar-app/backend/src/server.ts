@@ -75,8 +75,12 @@ app.listen(PORT, () => {
   console.log(`📍 http://localhost:${PORT}`);
   console.log('='.repeat(50));
 
-  // Запускаємо cron jobs
-  startAllCronJobs();
+  // Запускаємо cron jobs (можна вимкнути через ENV)
+  if (process.env.ENABLE_CRON !== 'false') {
+    startAllCronJobs();
+  } else {
+    console.log('⏱️ Cron jobs are disabled by ENABLE_CRON=false');
+  }
 });
 
 export default app;

@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import multer from 'multer';
-import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs/promises';
 import pool from '../config/database';
@@ -122,6 +121,7 @@ router.post('/events', async (req, res) => {
 // POST /api/admin/events/:id/images - Завантажити зображення для події
 router.post('/events/:id/images', upload.single('image'), async (req, res) => {
   try {
+    const sharp = (await import('sharp')).default;
     const { id } = req.params;
     const { title, order } = req.body;
 

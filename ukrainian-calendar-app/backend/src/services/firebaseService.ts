@@ -84,7 +84,7 @@ export const sendNotificationToAll = async (
         AND up.notifications_enabled = true
     `);
 
-    const tokens = result.rows.map(row => row.fcm_token);
+    const tokens = result.rows.map((row: { fcm_token: string }) => row.fcm_token);
 
     if (tokens.length === 0) {
       console.log('No active devices with notifications enabled');
